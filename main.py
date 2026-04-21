@@ -1,7 +1,12 @@
 import turtle
 
+BALL_SPEED = 1
+PADDLE_SPEED = 2
+
+
+
 wind = turtle.Screen()
-wind.title("Ping Pong by abdocraft")
+wind.title("Ping Pong by abderazak-dev")
 wind.bgcolor("yellow")
 wind.setup(width=800, height=600)
 wind.tracer(0)
@@ -50,8 +55,8 @@ ball.color("green")
 ball.shapesize(stretch_wid=1, stretch_len=1)
 ball.penup()
 ball.goto(0, 0)
-ball.dx = 0.3
-ball.dy = 0.3
+ball.dx = BALL_SPEED/3
+ball.dy = BALL_SPEED/3
 
 # score
 score1 = 0
@@ -66,64 +71,35 @@ score.write("Player 1: 0 - Player 2: 0", align="center", font=("Courier", 24, "n
 
 
 # functions
-def stick1_up():
-    y = stick1.ycor()
-    y += 20
-    stick1.sety(y)
 
-
-def stick1_down():
-    y = stick1.ycor()
-    y -= 20
-    stick1.sety(y)
-
-
-def stick2_up():
-    y = stick2.ycor()
-    y += 20
-    stick2.sety(y)
-
-
-def stick2_down():
-    y = stick2.ycor()
-    y -= 20
-    stick2.sety(y)
-
-
-def stick3_up():
-    x = stick3.xcor()
-    x += 20
-    stick3.setx(x)
-
-
-def stick3_down():
-    x = stick3.xcor()
-    x -= 20
-    stick3.setx(x)
-
-
-def stick4_up():
-    x = stick4.xcor()
-    x += 20
-    stick4.setx(x)
-
-
-def stick4_down():
-    x = stick4.xcor()
-    x -= 20
-    stick4.setx(x)
+def paddle_move(paddle: turtle.Turtle, direction: str):
+    print(direction)
+    if direction == "up" or direction == "down" :
+        y = paddle.ycor()
+        if direction == "up":
+            y += PADDLE_SPEED*10
+        else:
+            y -= PADDLE_SPEED*10
+        paddle.sety(y)
+    else:
+        x = paddle.xcor()
+        if direction == "right":
+            x += PADDLE_SPEED*10
+        else:
+            x -= PADDLE_SPEED*10
+        paddle.setx(x)
 
 
 # keyboard
 wind.listen()
-wind.onkeypress(stick1_up, "z")
-wind.onkeypress(stick1_down, "s")
-wind.onkeypress(stick2_up, "Up")
-wind.onkeypress(stick2_down, "Down")
-wind.onkeypress(stick3_up, "d")
-wind.onkeypress(stick3_down, "q")
-wind.onkeypress(stick4_up, "Right")
-wind.onkeypress(stick4_down, "Left")
+wind.onkeypress(lambda: paddle_move(stick1, "up"), "z")
+wind.onkeypress(lambda: paddle_move(stick1, "down"), "s")
+wind.onkeypress(lambda: paddle_move(stick2, "up"), "Up")
+wind.onkeypress(lambda: paddle_move(stick2, "down"), "Down")
+wind.onkeypress(lambda: paddle_move(stick3, "right"), "d")
+wind.onkeypress(lambda: paddle_move(stick3, "left"), "q")
+wind.onkeypress(lambda: paddle_move(stick4, "right"), "Right")
+wind.onkeypress(lambda: paddle_move(stick4, "left"), "Left")
 
 while True:
     wind.update()
