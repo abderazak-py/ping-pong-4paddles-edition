@@ -108,29 +108,29 @@ while True:
     ball.setx(ball.xcor() + ball.dx)
     ball.sety(ball.ycor() + ball.dy)
 
+    def update_score():
+        score.clear()
+        score.write("Player 1: {} - Player 2: {}".format(score1, score2), align="center", font=("Courier", 24, "normal"))
+
     # ball x walls ><
     if ball.ycor() > 286:  # player 1
         score1 += 1
-        score.clear()
-        score.write("Player 1: {} - Player 2: {}".format(score1, score2), align="center", font=("Courier", 24, "normal"))
+        update_score()
         ball.goto(0, 0)
         ball.dy *= -1
     if ball.ycor() < -283:  # player 2
         score2 += 1
-        score.clear()
-        score.write("Player 1: {} - Player 2: {}".format(score1, score2), align="center", font=("Courier", 24, "normal"))
+        update_score()
         ball.goto(0, 0)
         ball.dy *= -1
     if ball.xcor() > 383:  # player 1
         score1 += 1
-        score.clear()
-        score.write("Player 1: {} - Player 2: {}".format(score1, score2), align="center", font=("Courier", 24, "normal"))
+        update_score()
         ball.goto(0, 0)
         ball.dx *= -1
     if ball.xcor() < -386:  # player 2
         score2 += 1
-        score.clear()
-        score.write("Player 1: {} - Player 2: {}".format(score1, score2), align="center", font=("Courier", 24, "normal"))
+        update_score()
         ball.goto(0, 0)
         ball.dx *= -1
 
