@@ -3,49 +3,29 @@ import turtle
 BALL_SPEED = 1
 PADDLE_SPEED = 2
 
-
-
 wind = turtle.Screen()
 wind.title("Ping Pong by abderazak-dev")
 wind.bgcolor("yellow")
 wind.setup(width=800, height=600)
 wind.tracer(0)
 
-# stick1 player 1
+# stick intilize
+def initilize(paddle: turtle.Turtle, color: str, x: float, y: float, wid:float, len:float):
+    paddle.speed(0)
+    paddle.shape("square")
+    paddle.color(color)
+    paddle.shapesize(stretch_wid=wid, stretch_len=len)
+    paddle.penup()
+    paddle.goto(x, y)
+
 stick1 = turtle.Turtle()
-stick1.speed(0)
-stick1.shape("square")
-stick1.color("blue")
-stick1.shapesize(stretch_wid=5, stretch_len=1)
-stick1.penup()
-stick1.goto(-350, 0)
-
-# stick2 player 2
+initilize(stick1, "blue", -350, 0,5,1)
 stick2 = turtle.Turtle()
-stick2.speed(0)
-stick2.shape("square")
-stick2.color("red")
-stick2.shapesize(stretch_wid=5, stretch_len=1)
-stick2.penup()
-stick2.goto(350, 0)
-
-# stick3 player 1
+initilize(stick2, "red", 350, 0,5,1)
 stick3 = turtle.Turtle()
-stick3.speed(0)
-stick3.shape("square")
-stick3.color("blue")
-stick3.shapesize(stretch_wid=1, stretch_len=5)
-stick3.penup()
-stick3.goto(0, -250)
-
-# stick4 player 2
+initilize(stick3, "blue", 0, -250,1,5)
 stick4 = turtle.Turtle()
-stick4.speed(0)
-stick4.shape("square")
-stick4.color("red")
-stick4.shapesize(stretch_wid=1, stretch_len=5)
-stick4.penup()
-stick4.goto(0, 250)
+initilize(stick4, "red", 0, 250,1,5)
 
 # ball
 ball = turtle.Turtle()
@@ -69,9 +49,7 @@ score.hideturtle()
 score.goto(0, 260)
 score.write("Player 1: 0 - Player 2: 0", align="center", font=("Courier", 24, "normal"))
 
-
 # functions
-
 def paddle_move(paddle: turtle.Turtle, direction: str):
     print(direction)
     if direction == "up" or direction == "down" :
@@ -88,7 +66,6 @@ def paddle_move(paddle: turtle.Turtle, direction: str):
         else:
             x -= PADDLE_SPEED*10
         paddle.setx(x)
-
 
 # keyboard
 wind.listen()
